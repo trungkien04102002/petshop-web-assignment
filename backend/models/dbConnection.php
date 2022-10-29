@@ -19,8 +19,9 @@
           if (!isset(self::$instance)) {
             try{
                 self::$instance = mysqli_connect("localhost", "root", "123456", "petshop");
-                throw new Exception("Cannot connect!", 400);
-
+                if (!self::$instance){
+                    throw new Exception("Cannot connect!",500);
+                }
             }
             catch(Exception $e){
                 http_response_code(404);

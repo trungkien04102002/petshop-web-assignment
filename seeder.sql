@@ -3,6 +3,7 @@ use petshop;
 create table if not exists users
 (
     userID int primary key auto_increment, 
+    email varchar(100), 
     fullName varchar(70) not null default '',
     sex char(1),
     password varchar(200) not null default '',
