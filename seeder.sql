@@ -9,7 +9,8 @@ create table if not exists users
     password varchar(200) not null default '',
     isAdmin bool not null default false,
     phoneNumber varchar(15),
-    accumulatedScore int not null default 0    
+    accumulatedScore int not null default 0,
+    avatarFileName varchar(20) default '0.png'   
 );
 
 
@@ -108,6 +109,11 @@ create table if not exists orderedProduct
     foreign key(orderID) references orders(orderID) on delete restrict,
     foreign key(petProductID) references petProducts(petProductID) on delete restrict
 );
+
+INSERT INTO users(email, fullName, password, phoneNumber, sex, isAdmin)
+VALUES 
+('dat123@gmail.com', 'Lương Đạt','$2y$10$pU1tjzqvYixt.JMpfYfVd.UF29e2RSu5BcyVP6qOMAVOZzukFjaWG', '9999999999','M', true ),
+('kien123@gmail.com', 'Trung Kiên','$10$u.woZ2TqYCySI/K/bZmMdu.U3XNYFkAvv.NYHC6RM30GMHVpf0Dwa', '8888888888','M', false );
 
 INSERT INTO pets(name, unitPrice, breed, isBought, imageUrl, age, discountedPrice)
 VALUES 

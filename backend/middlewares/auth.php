@@ -11,6 +11,9 @@
         if (!$user){
             throw new Exception("Cannot decode token!", 400);
         }
+        if (!UserModel::checkUserExistence($user->email)){
+            throw new Exception("Cannot find user!", 404);
+        }
         return (array) $user;
     }
 ?>
