@@ -61,7 +61,7 @@
                             $hashPassword =  password_hash($_POST["password"],PASSWORD_DEFAULT);
                             echo json_encode(UserModel::createNewUser($email, $fullName, $sex, $phoneNumber, $hashPassword));
                         };
-
+                        break;
                     case "login":
                         $email = $_POST["email"];
                         $password = $_POST["password"];

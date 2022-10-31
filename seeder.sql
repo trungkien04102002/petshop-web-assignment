@@ -113,7 +113,7 @@ create table if not exists orderedProduct
 INSERT INTO users(email, fullName, password, phoneNumber, sex, isAdmin)
 VALUES 
 ('dat123@gmail.com', 'Lương Đạt','$2y$10$pU1tjzqvYixt.JMpfYfVd.UF29e2RSu5BcyVP6qOMAVOZzukFjaWG', '9999999999','M', true ),
-('kien123@gmail.com', 'Trung Kiên','$10$u.woZ2TqYCySI/K/bZmMdu.U3XNYFkAvv.NYHC6RM30GMHVpf0Dwa', '8888888888','M', false );
+('kien123@gmail.com', 'Trung Kiên','$2y$10$/MnqhU72XAJM4IEg6QCpWu8zOBtxy6iskzPl04nf1VWlaRdUh5RYC', '8888888888','M', false );
 
 INSERT INTO pets(name, unitPrice, breed, isBought, imageUrl, age, discountedPrice)
 VALUES 

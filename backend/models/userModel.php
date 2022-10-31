@@ -91,5 +91,18 @@
             unset($row["password"]);
             return $row;          
         }
+        public static function getAllUsers(){
+            $conn = DbConnection::getInstance();
+            $stmt = $conn->prepare('SELECT * FROM users WHERE isAdmin = false');
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $users = array();
+
+            while ($row = $result->fetch_assoc()) {
+                unset($row["password"]);
+                array_push($users, $row);
+            }       
+            return $users;
+        }
     }
 ?>
