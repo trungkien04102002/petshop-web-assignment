@@ -5,7 +5,7 @@
         public static function getInstance() {
           if (!isset(self::$instance)) {
             try{
-                self::$instance = mysqli_connect("localhost", "root", "123456", "petshop");
+                self::$instance = mysqli_connect("localhost", "root", "", "petshop");
                 if (!self::$instance){
                     throw new Exception("Cannot connect!",500);
                 }
