@@ -12,13 +12,45 @@
     $method = $_SERVER["REQUEST_METHOD"];
     try{
         switch ($method){
+           
             case "GET":
-                echo ProductModel::getProducts();
+                switch($path[3]){
+                    case "pets":
+                        echo json_encode(ProductModel::getPets());
+                        break;
+                    case "products":
+                        echo json_encode(ProductModel::getPetProducts());
+                        break;
+                    case "foods":
+                        echo json_encode(ProductModel::getPetFoods());
+                        break;  
+                    case "services":
+                        echo json_encode(ProductModel::getPetServices());
+                        break;  
+                    case "searchByBreed":
+                        // Code here to get params 
+                        if (!isset($_GET["breed"])){
+                            throw new Exception("Lack information", 400);
+                        }
+                        $breed = $_GET["breed"];
+                        echo json_encode(ProductModel::searchByBreed($breed));
+                        break;
+                    case "searchItem":
+                        // Code here to get params 
+                        if (!isset($_GET["keySearch"])){
+                            throw new Exception("Lack information", 400);
+                        }
+                        $keySearch = $_GET["keySearch"];
+                        echo json_encode(ProductModel::searchItem($keySearch));
+
+                } 
+                break;
             case "POST": 
-    
+                break;
             case "PATCH":
-    
+                break;
             case "DELETE":
+                break;
     
         }
     }
