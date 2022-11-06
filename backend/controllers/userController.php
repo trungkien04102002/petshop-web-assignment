@@ -118,17 +118,7 @@
                     throw new Exception("Cannot find route!",400);
                 }
 
-                if (!isset($data["email"])){
-                    throw new Exception("Lack information", 400);
-                }
-                $email = $data["email"];
-
-                if ($email != $user["email"] && !$user["isAdmin"]){
-                    throw new Exception("You are not allowed to edit this profile", 400);
-                }
-                if (!UserModel::checkUserExistence($email)){
-                    throw new Exception("Cannot find user!", 404);
-                }                
+                $email = $user["email"];              
 
                 switch ($path[3]){
                     case "edit":
@@ -139,7 +129,16 @@
                         $fullName = $data["fullName"];
                         $sex = $data["sex"];
                         echo json_encode(UserModel::editProfile($email,$fullName,$phoneNumber,$sex));
-                }
+                        break;
+                    case "editpassword":
+
+                        if (!isset($data["password"])){
+                            throw new Exception("Lack information", 400);                           
+                        }
+                        $hashPassword =  password_hash($data["password"],PASSWORD_DEFAULT);
+                        echo json_encode(UserModel::updatePassword($user["userID"],$hashPassword));
+                        break;
+                    }
                 break;
             case "DELETE":
                 break;

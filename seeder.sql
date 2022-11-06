@@ -117,13 +117,13 @@ VALUES
 
 INSERT INTO pets(name, unitPrice, breed, isBought, imageUrl, age, discountedPrice)
 VALUES 
-('Golden đực siêu cưng',16000000, 'Chó Golden Retriever', false, 'https://matpetfamily.com/wp-content/uploads/2022/10/b2fe27874105865bdf14-600x792.jpg', 5, NULL),
-('Golden dễ thương', 15000000, 'Chó Golden Retriever', false, 'https://matpetfamily.com/wp-content/uploads/2022/10/b2fe27874105865bdf14.jpg', 5, NULL),
-('Corgi ú nu siêu xinh', 25000000, 'Chó Corgi', false, 'https://matpetfamily.com/wp-content/uploads/2019/12/75462468_1446520615496018_4012590135639015424_n201-600x800.jpg', 5, NULL),
-('Corgi lông dài đực cute', 30000000, 'Chó Corgi', false, 'https://matpetfamily.com/wp-content/uploads/2022/10/8686e91cb9fb7ea527ea.jpg', 5, NULL),
-('Husky đại ngáo ú nu',15000000, 'Chó Husky', false, 'https://matpetfamily.com/wp-content/uploads/2019/12/72835561_1437995923015154_7605397220103290880_n.jpg', 5, NULL),
-('Corgi chân lùn', 22000000, 'Chó Corgi', false, 'https://matpetfamily.com/wp-content/uploads/2022/08/f7569eb750f695a8cce7.jpg', 4, NULL),
-('Phốc sóc vàng bé xíu xiuu', 30000000, 'Chó Phốc Sóc', false, 'https://matpetfamily.com/wp-content/uploads/2022/09/d359787f1e21da7f8330.jpg', 4, NULL),
+('Chó Golden đực siêu cưng',16000000, 'Chó Golden Retriever', false, 'https://matpetfamily.com/wp-content/uploads/2022/10/b2fe27874105865bdf14-600x792.jpg', 5, NULL),
+('Chó Golden dễ thương', 15000000, 'Chó Golden Retriever', false, 'https://matpetfamily.com/wp-content/uploads/2022/10/b2fe27874105865bdf14.jpg', 5, NULL),
+('Chó Corgi ú nu siêu xinh', 25000000, 'Chó Corgi', false, 'https://matpetfamily.com/wp-content/uploads/2019/12/75462468_1446520615496018_4012590135639015424_n201-600x800.jpg', 5, NULL),
+('Chó Corgi lông dài đực cute', 30000000, 'Chó Corgi', false, 'https://matpetfamily.com/wp-content/uploads/2022/10/8686e91cb9fb7ea527ea.jpg', 5, NULL),
+('Chó Husky đại ngáo ú nu',15000000, 'Chó Husky', false, 'https://matpetfamily.com/wp-content/uploads/2019/12/72835561_1437995923015154_7605397220103290880_n.jpg', 5, NULL),
+('Chó Corgi chân lùn', 22000000, 'Chó Corgi', false, 'https://matpetfamily.com/wp-content/uploads/2022/08/f7569eb750f695a8cce7.jpg', 4, NULL),
+('Chó Phốc sóc vàng bé xíu xiuu', 30000000, 'Chó Phốc Sóc', false, 'https://matpetfamily.com/wp-content/uploads/2022/09/d359787f1e21da7f8330.jpg', 4, NULL),
 ('Mèo Scottish Silver', 20000000, 'Mèo Tai Cụp', false, 'https://matpetfamily.com/wp-content/uploads/2020/02/78483435_1467114463436633_1463736498133139456_n-600x559.jpg', 3, NULL),
 ('Mèo tai cụp siêu đáng yêu', 20000000, 'Mèo Tai Cụp', false, 'https://matpetfamily.com/wp-content/uploads/2022/02/273437012_472239601205150_3512259468476545658_n-600x601.jpg', 2, NULL),
 ('Mèo Ragdoll yêu yêu', 25000000, 'Mèo Anh', false, 'https://matpetfamily.com/wp-content/uploads/2022/09/995035b80faecbf092bf-600x764.jpg', 3, NULL),

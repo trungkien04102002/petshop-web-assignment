@@ -179,12 +179,24 @@
             return $orders;
         }
 
-        public static function updateIsPaid($orderID, $isPaid){
+        public static function updateIsPaid($orderID){
             $conn = DbConnection::getInstance();
-            $stmt = $conn->prepare('UPDATE orders SET isPaid = ? WHERE orderID = ?');
-            $stmt->bind_param('ii', $isPaid,$orderID); 
+            $stmt = $conn->prepare('SELECT isPaid,totalPrice,userID FROM orders WHERE orderID = ?');
+            $stmt->bind_param('i',$orderID); 
             $stmt->execute(); 
             $result = $stmt->get_result(); 
+            $order = $result->fetch_assoc();
+            if ($order["isPaid"] == true) {
+                throw new Exception("You have already confirmed this order!", 400);
+            }
+            $stmt = $conn->prepare('UPDATE orders SET isPaid = true WHERE orderID = ?');
+            $stmt->bind_param('i',$orderID); 
+            $stmt->execute(); 
+            $score = (int) $order["totalPrice"]/10000;
+            $stmt = $conn->prepare('UPDATE users SET accumulatedScore = accumulatedScore + ? WHERE userID = ?');
+            $stmt->bind_param('ii',$score,$order["userID"]); 
+            $stmt->execute();         
+            
 
             return ["msg"=>"success"];
         }

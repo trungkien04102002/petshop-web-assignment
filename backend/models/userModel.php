@@ -76,7 +76,13 @@
             $row = $result->fetch_assoc();
             return password_verify($password, $row["password"]);          
         }
-
+        public static function updatePassword($userID,$password){
+            $conn = DbConnection::getInstance();
+            $stmt = $conn->prepare('UPDATE users SET password = ? WHERE userID = ?');
+            $stmt->bind_param('si', $password,$userID); 
+            $stmt->execute(); 
+            return ["msg"=>"success"];          
+        }
         public static function editProfile($email, $fullName, $phoneNumber, $sex){
             $conn = DbConnection::getInstance();
             $stmt = $conn->prepare('UPDATE users SET fullName = ?, phoneNumber = ?, sex = ? WHERE email = ?');

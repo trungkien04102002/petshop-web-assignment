@@ -39,7 +39,7 @@
             return $petFoods;
         }
 
-        public static function getServices(){
+        public static function getPetServices(){
             $conn = DbConnection::getInstance();
             $stmt = $conn -> prepare('SELECT * FROM petServices');
             $stmt -> execute();
@@ -65,7 +65,6 @@
 
         public static function searchItem($keySearch){ // To search anythings in Pets, Services, Foods, Products table
             $conn = DbConnection::getInstance();       
-            echo $keySearch;
             /*
             // Get pets have name is same with keySearch
             $param = "%{$keySearch}%";
@@ -80,17 +79,14 @@
                 array_push($pets,$row);
             } */
             $keySearch = "%$keySearch%"; // prepare the $name variable 
-            $sql = "SELECT * FROM name WHERE name LIKE ?"; // SQL with parameters
+            $sql = "SELECT * FROM pets WHERE name LIKE ?"; // SQL with parameters
             $stmt = $conn->prepare($sql); 
-            $stmt->bind_param("s", $keySearch); // here we can use only a variable
+            $stmt->bind_param('s', $keySearch); // here we can use only a variable
             $stmt->execute();
-            $result = $stmt->get_result(); // get the mysqli result
+            $result0 = $stmt->get_result(); // get the mysqli result
             $pets = array();
             while ($row = $result0->fetch_assoc()){
                 array_push($pets,$row);
-            }
-            foreach ($pets as $pet) {
-                echo $pet, "\n";
             }
 
             // Get Products have name is same with keySearch
@@ -122,9 +118,8 @@
             }
 
             // Combine arrray
-            // $combine_array= $pets + $petProducts + $petProducts + $petServices;
-            // return $combine_array;
-            return $pets;
+            $combine_array= $pets + $petProducts + $petProducts + $petServices;
+            return $combine_array;
         }
         
     }

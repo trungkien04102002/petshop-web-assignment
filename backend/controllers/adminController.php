@@ -43,7 +43,7 @@
                         echo json_encode("");
                         break;
                     case "orderstate":
-                        echo json_encode(OrderModel::updateIsPaid($data["orderID"], $data["isPaid"]));
+                        echo json_encode(OrderModel::updateIsPaid($data["orderID"]));
                         break;
                 }
                 break;
