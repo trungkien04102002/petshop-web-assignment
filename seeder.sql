@@ -110,10 +110,21 @@ create table if not exists orderedProduct
     foreign key(petProductID) references petProducts(petProductID) on delete restrict
 );
 
+
+create table if not exists reviews
+(
+	content text(400) not null,
+    contentID int primary key auto_increment,
+    userID int not null,
+    FOREIGN KEY (userID) REFERENCES users(userID)
+);
+
 INSERT INTO users(email, fullName, password, phoneNumber, sex, isAdmin)
 VALUES 
 ('dat123@gmail.com', 'Lương Đạt','$2y$10$pU1tjzqvYixt.JMpfYfVd.UF29e2RSu5BcyVP6qOMAVOZzukFjaWG', '9999999999','M', true ),
-('kien123@gmail.com', 'Trung Kiên','$2y$10$/MnqhU72XAJM4IEg6QCpWu8zOBtxy6iskzPl04nf1VWlaRdUh5RYC', '8888888888','M', false );
+('kien123@gmail.com', 'Trung Kiên','$2y$10$/MnqhU72XAJM4IEg6QCpWu8zOBtxy6iskzPl04nf1VWlaRdUh5RYC', '8888888888','M', false ),
+('taylorswift@gmail.com', 'Taylor Swift','$2y$10$/MnqhU72XAJM4IEg6QCpWu8zOBtxy6iskzPl04nf1VWlaRdUh5RYC', '7777777777','F', false ),
+('giakhai@gmail.com', 'Lương Gia Khải','$2y$10$/MnqhU72XAJM4IEg6QCpWu8zOBtxy6iskzPl04nf1VWlaRdUh5RYC', '6666666666','F', false );
 
 INSERT INTO pets(name, unitPrice, breed, isBought, imageUrl, age, discountedPrice)
 VALUES 
@@ -158,3 +169,9 @@ VALUES
 ('Dầu gội', 165000, 'https://www.vietpet.net/wp-content/uploads/2020/07/dau-goi-cho-cho-meo-professional-pet-products-tearless-pet-shampoo.jpg', 'Đồ vệ sinh hàng ngày', 112, NULL),
 ('Lồng hàng không', 512000, 'https://matpetfamily.com/wp-content/uploads/2020/07/kiotviet_9fb08bc272be5ed1a418b7297e04e645-270x270.png', 'Chuồng',10, NULL),
 ('Lồng D65', 1050000, 'https://matpetfamily.com/wp-content/uploads/2020/07/kiotviet_82baaecc17bfafbc44f836fc66a48361.jpg', 'Chuồng', 10, NULL);
+
+INSERT INTO reviews(content, userID)
+VALUES 
+('Dịch vụ của shop rất tuyệt vời, chú chó em mua cực kì dễ thương luôn!',2),
+('Từ ngày em mua cát mèo của shop thì việc hốt phân mèo trở nên dễ dàng hơn!',3),
+('Tôi rất hài lòng với sản phẩm của shop nhưng rất chê bạn nhân viên tên Phú',4);
