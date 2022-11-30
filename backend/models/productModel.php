@@ -3,9 +3,12 @@
 
     class ProductModel{
 
-        public static function getPets(){
+        public static function getPets($page){
             $conn = DbConnection::getInstance();
-            $stmt = $conn->prepare('SELECT * FROM pets');
+            $record_per_page = 10;
+            $start_from = ($page-1)*$record_per_page;
+            $stmt = $conn->prepare('SELECT * FROM pets LIMIT ?, ?');
+            $stmt->bind_param('ss', $start_from,$record_per_page);
             $stmt->execute(); 
             $result = $stmt->get_result(); 
             $pets = array();
@@ -15,9 +18,12 @@
             return $pets;
         }
         
-        public static function getPetProducts(){
+        public static function getPetProducts($page){
             $conn = DbConnection::getInstance();
-            $stmt = $conn->prepare('SELECT * FROM petProducts');
+            $record_per_page = 3;
+            $start_from = ($page-1)*$record_per_page;
+            $stmt = $conn->prepare('SELECT * FROM petProducts LIMIT ?, ?');
+            $stmt->bind_param('ss', $start_from,$record_per_page);
             $stmt->execute(); 
             $result = $stmt->get_result(); 
             $petProducts = array();
@@ -27,9 +33,12 @@
             return $petProducts;
         }
         
-        public static function getPetFoods(){
+        public static function getPetFoods($page){
             $conn = DbConnection::getInstance();
-            $stmt = $conn -> prepare('SELECT * FROM petFoods');
+            $record_per_page = 10;
+            $start_from = ($page-1)*$record_per_page;
+            $stmt = $conn->prepare('SELECT * FROM petFoods LIMIT ?, ?');
+            $stmt->bind_param('ss', $start_from,$record_per_page);
             $stmt-> execute();
             $result = $stmt->get_result();
             $petFoods = array();
@@ -39,9 +48,12 @@
             return $petFoods;
         }
 
-        public static function getPetServices(){
+        public static function getPetServices($page){
             $conn = DbConnection::getInstance();
-            $stmt = $conn -> prepare('SELECT * FROM petServices');
+            $record_per_page = 10;
+            $start_from = ($page-1)*$record_per_page;
+            $stmt = $conn->prepare('SELECT * FROM petServices LIMIT ?, ?');
+            $stmt->bind_param('ss', $start_from,$record_per_page);
             $stmt -> execute();
             $result = $stmt->get_result();
             $petServices = array();
@@ -50,10 +62,12 @@
             }
             return $petServices;
         }
-        public static function searchByBreed($breed){ // To sort the list of pets by breed
+        public static function searchByBreed($breed,$page){ // To sort the list of pets by breed
             $conn = DbConnection::getInstance();
-            $stmt = $conn -> prepare('SELECT * FROM pets WHERE breed = ?');
-            $stmt->bind_param('s', $breed);
+            $record_per_page = 10;
+            $start_from = ($page-1)*$record_per_page;
+            $stmt = $conn -> prepare('SELECT * FROM pets WHERE breed = ? LIMIT ?,?');
+            $stmt->bind_param('sss', $breed,$start_from,$record_per_page);
             $stmt-> execute();
             $result = $stmt->get_result();
             $pets = array();
@@ -63,35 +77,26 @@
             return $pets;
         }
 
-        public static function searchItem($keySearch){ // To search anythings in Pets, Services, Foods, Products table
+        public static function searchItem($keySearch,$page){ // To search anythings in Pets, Services, Foods, Products table  
             $conn = DbConnection::getInstance();       
-            /*
+            $keySearch = "%$keySearch%";
+            $record_per_page = 10;
+            $start_from = ($page-1)*$record_per_page; // prepare the $name variable 
+
             // Get pets have name is same with keySearch
-            $param = "%{$keySearch}%";
-            $stmt0 = $conn -> prepare('SELECT * FROM pets WHERE name LIKE ?');
-            //$param = preg_replace('/(?<!\\\)([%_])/', '\\\$1',$keySearch);
-            //$stmt0 = $conn->prepare('SELECT * FROM pets WHERE name LIKE CONCAT('%',?,'%')');
-            $stmt0->bind_param('s', $param);
-            $stmt0-> execute();
-            $result0 = $stmt0->get_result();
-            $pets = array();
-            while ($row = $result0->fetch_assoc()){
-                array_push($pets,$row);
-            } */
-            $keySearch = "%$keySearch%"; // prepare the $name variable 
-            $sql = "SELECT * FROM pets WHERE name LIKE ?"; // SQL with parameters
-            $stmt = $conn->prepare($sql); 
-            $stmt->bind_param('s', $keySearch); // here we can use only a variable
-            $stmt->execute();
-            $result0 = $stmt->get_result(); // get the mysqli result
+            $sql = "SELECT * FROM pets WHERE name LIKE ? LIMIT ?,?"; // SQL with parameters
+            $stmt0 = $conn->prepare($sql); 
+            $stmt0->bind_param('sss', $keySearch,$start_from,$record_per_page); // here we can use only a variable
+            $stmt0->execute();
+            $result0 = $stmt0->get_result(); // get the mysqli result
             $pets = array();
             while ($row = $result0->fetch_assoc()){
                 array_push($pets,$row);
             }
 
             // Get Products have name is same with keySearch
-            $stmt1 = $conn -> prepare('SELECT * FROM petProducts WHERE name = ?');
-            $stmt1->bind_param('s', $keySearch);
+            $stmt1 = $conn -> prepare('SELECT * FROM petProducts WHERE name LIKE ? LIMIT ?,?');
+            $stmt1->bind_param('sss', $keySearch, $start_from, $record_per_page);
             $stmt1-> execute();
             $result1 = $stmt1->get_result();
             $petProducts = array();
@@ -99,8 +104,8 @@
                 array_push($petProducts,$row);
             }
             // Get foods have name is same with keySearch
-            $stmt2 = $conn -> prepare('SELECT * FROM petFoods WHERE name = ?');
-            $stmt2->bind_param('s', $keySearch);
+            $stmt2 = $conn -> prepare('SELECT * FROM petFoods WHERE name LIke ? LIMIT ?,?');
+            $stmt2->bind_param('sss', $keySearch,$start_from, $record_per_page);
             $stmt2-> execute();
             $result2 = $stmt2->get_result();
             $petFoods = array();
@@ -108,8 +113,8 @@
                 array_push($petFoods,$row);
             }
             // Get services have name is same with keySearch
-            $stmt3 = $conn -> prepare('SELECT * FROM petServices WHERE name = ?');
-            $stmt3->bind_param('s', $keySearch);
+            $stmt3 = $conn -> prepare('SELECT * FROM petServices WHERE name LIKE ? LIMIT ?,?');
+            $stmt3->bind_param('sss', $keySearch,$start_from,$record_per_page);
             $stmt3-> execute();
             $result3 = $stmt3->get_result();
             $petServices = array();
@@ -117,9 +122,10 @@
                 array_push($petServices,$row);
             }
 
-            // Combine arrray
+            // Combine array
             $combine_array= $pets + $petProducts + $petProducts + $petServices;
             return $combine_array;
+
         }
         
     }

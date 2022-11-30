@@ -16,16 +16,36 @@
             case "GET":
                 switch($path[3]){
                     case "pets":
-                        echo json_encode(ProductModel::getPets());
+                        if(isset($_GET["page"])){
+                            $page = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
+                        echo json_encode(ProductModel::getPets($page));
                         break;
                     case "products":
-                        echo json_encode(ProductModel::getPetProducts());
+                        if(isset($_GET["page"])){
+                            $page = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
+                        echo json_encode(ProductModel::getPetProducts($page));
                         break;
                     case "foods":
-                        echo json_encode(ProductModel::getPetFoods());
+                        if(isset($_GET["page"])){
+                            $page = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
+                        echo json_encode(ProductModel::getPetFoods($page));
                         break;  
                     case "services":
-                        echo json_encode(ProductModel::getPetServices());
+                        if(isset($_GET["page"])){
+                            $page = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
+                        echo json_encode(ProductModel::getPetServices($page));
                         break;  
                     case "searchByBreed":
                         // Code here to get params 
@@ -33,16 +53,25 @@
                             throw new Exception("Lack information", 400);
                         }
                         $breed = $_GET["breed"];
-                        echo json_encode(ProductModel::searchByBreed($breed));
+                        if(isset($_GET["page"])){
+                            $page = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
+                        echo json_encode(ProductModel::searchByBreed($breed,$page));
                         break;
                     case "searchItem":
                         // Code here to get params 
                         if (!isset($_GET["keySearch"])){
                             throw new Exception("Lack information", 400);
                         }
+                        if(isset($_GET["page"])){
+                            $page = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        }
                         $keySearch = $_GET["keySearch"];
-                        echo json_encode(ProductModel::searchItem($keySearch));
-
+                        echo json_encode(ProductModel::searchItem($keySearch,$page));
                 } 
                 break;
             case "POST": 
