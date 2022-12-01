@@ -90,65 +90,93 @@
         public static function addItemToOrder($orderID, $type, $id, $quantity = 0){
             $conn = DbConnection::getInstance();
             if ($type == "pet"){
+                $stmt = $conn->prepare("SELECT discountedPrice, unitPrice FROM pets WHERE id = ?");
+                $stmt->bind_param('i',$id); 
+                $stmt->execute(); 
+                $result = $stmt->get_result(); 
+                $row = $result->fetch_assoc();
+
+                if ($row["discountedPrice"] === NULL){
+                    $price = $row["unitPrice"];
+                }
+                else {
+                    $price = $row["discountedPrice"];
+                }
                 $stmt = $conn->prepare("INSERT INTO orderedPet(orderID, petID, price) VALUES
-                    (?,?,(SELECT unitPrice FROM pets WHERE id = ?))");
-                $stmt->bind_param('iii',$orderID, $id, $id); 
+                    (?,?,?)");
+                $stmt->bind_param('iii',$orderID, $id,$price); 
                 $stmt->execute(); 
                 $itemID = $conn->insert_id;
                 $stmt = $conn->prepare("UPDATE pets SET isBought = true WHERE id = ?");
                 $stmt->bind_param('i',$id); 
                 $stmt->execute(); 
-                $stmt = $conn->prepare("SELECT price FROM orderedPet WHERE orderedPetID = ? ");
-                $stmt->bind_param('i',$itemID); 
-                $stmt->execute(); 
-                $result = $stmt->get_result(); 
-                $row = $result->fetch_assoc();
-                return $row["price"];                
+                return $price;                
             }
             else if ($type == "service"){
-                $stmt = $conn->prepare("INSERT INTO orderedService(orderID, petServiceID, price, quantity) VALUES
-                    (?,?,(SELECT unitPrice FROM petServices WHERE id = ?),?)");
-                $stmt->bind_param('iiii',$orderID, $id, $id,$quantity); 
-                $stmt->execute(); 
-                $itemID = $conn->insert_id;
-                $stmt = $conn->prepare("SELECT price FROM orderedService WHERE orderedServiceID = ? ");
-                $stmt->bind_param('i',$itemID); 
+                $stmt = $conn->prepare("SELECT discountedPrice, unitPrice FROM petServices WHERE id = ?");
+                $stmt->bind_param('i',$id); 
                 $stmt->execute(); 
                 $result = $stmt->get_result(); 
                 $row = $result->fetch_assoc();
-                return $row["price"]*$quantity; 
+
+                if ($row["discountedPrice"] === NULL){
+                    $price = $row["unitPrice"];
+                }
+                else {
+                    $price = $row["discountedPrice"];
+                }
+
+                $stmt = $conn->prepare("INSERT INTO orderedService(orderID, petServiceID, price, quantity) VALUES
+                    (?,?,?,?)");
+                $stmt->bind_param('iiii',$orderID, $id, $price,$quantity); 
+                $stmt->execute(); 
+                return $price*$quantity; 
             }
             else if ($type == "food") {
-                $stmt = $conn->prepare("INSERT INTO orderedFood(orderID, petFoodID, price, quantity) VALUES
-                    (?,?,(SELECT unitPrice FROM petFoods WHERE id = ?),?)");
-                $stmt->bind_param('iiii',$orderID, $id, $id, $quantity); 
+                $stmt = $conn->prepare("SELECT discountedPrice, unitPrice FROM petFoods WHERE id = ?");
+                $stmt->bind_param('i',$id); 
                 $stmt->execute(); 
-                $itemID = $conn->insert_id;
+                $result = $stmt->get_result(); 
+                $row = $result->fetch_assoc();
+
+                if ($row["discountedPrice"] === NULL){
+                    $price = $row["unitPrice"];
+                }
+                else {
+                    $price = $row["discountedPrice"];
+                }
+
+                $stmt = $conn->prepare("INSERT INTO orderedFood(orderID, petFoodID, price, quantity) VALUES
+                    (?,?,?,?)");
+                $stmt->bind_param('iiii',$orderID, $id, $price, $quantity); 
+                $stmt->execute(); 
                 $stmt = $conn->prepare("UPDATE petFoods SET quantity = quantity - ? WHERE id = ?");
                 $stmt->bind_param('ii',$quantity,$id); 
                 $stmt->execute(); 
-                $stmt = $conn->prepare("SELECT price FROM orderedFood WHERE orderedFoodID = ? ");
-                $stmt->bind_param('i',$itemID); 
+                return $price*$quantity;                 
+            }
+            else{
+                $stmt = $conn->prepare("SELECT discountedPrice, unitPrice FROM petProducts WHERE id = ?");
+                $stmt->bind_param('i',$id); 
                 $stmt->execute(); 
                 $result = $stmt->get_result(); 
                 $row = $result->fetch_assoc();
-                return $row["price"]*$quantity;                 
-            }
-            else{
+
+                if ($row["discountedPrice"] === NULL){
+                    $price = $row["unitPrice"];
+                }
+                else {
+                    $price = $row["discountedPrice"];
+                }
+
                 $stmt = $conn->prepare("INSERT INTO orderedProduct(orderID, petProductID, price, quantity) VALUES
-                    (?,?,(SELECT unitPrice FROM petProducts WHERE id = ?),?)");
-                $stmt->bind_param('iiii',$orderID, $id, $id, $quantity); 
+                    (?,?,?,?)");
+                $stmt->bind_param('iiii',$orderID, $id, $price, $quantity); 
                 $stmt->execute(); 
-                $itemID = $conn->insert_id;
                 $stmt = $conn->prepare("UPDATE petProducts SET quantity = quantity - ? WHERE id = ?");
                 $stmt->bind_param('ii',$quantity,$id); 
                 $stmt->execute(); 
-                $stmt = $conn->prepare("SELECT price FROM orderedProduct WHERE orderedProductID = ? ");
-                $stmt->bind_param('i',$itemID); 
-                $stmt->execute(); 
-                $result = $stmt->get_result(); 
-                $row = $result->fetch_assoc();
-                return $row["price"]*$quantity;                 
+                return $price*$quantity;                 
             }
         }
 
