@@ -16,7 +16,7 @@ create table if not exists users
 
 create table if not exists pets
 (
-	petID int primary key auto_increment,
+	id int primary key auto_increment,
     name varchar(200) not null default 'Chó mèo chuột gà',
     unitPrice int not null default 0,
     breed varchar(100) not null default '',
@@ -28,7 +28,7 @@ create table if not exists pets
 
 create table if not exists petFoods
 (
-	petFoodID int primary key auto_increment,
+	id int primary key auto_increment,
     name varchar(200) not null default 'Ice cream chilling chilling',
     unitPrice int not null default 0,	
     imageUrl varchar(200), 
@@ -37,7 +37,7 @@ create table if not exists petFoods
 );
 create table if not exists petProducts
 (
-	petProductID int primary key auto_increment,
+	id int primary key auto_increment,
     name varchar(200) not null default 'Pet bracet',
     unitPrice int not null default 0,	
     imageUrl varchar(200), 
@@ -47,7 +47,7 @@ create table if not exists petProducts
 );
 create table if not exists petServices
 (
-	petServiceID int primary key auto_increment,
+	id int primary key auto_increment,
     name varchar(200) not null default 'Hotel for me and youuu',
     unitPrice int not null default 0,	
     imageUrl varchar(200), 
@@ -74,7 +74,7 @@ create table if not exists orderedPet
     petID int not null,
     price int,
     foreign key(orderID) references orders(orderID) on delete restrict,
-    foreign key(petID) references pets(petID) on delete restrict
+    foreign key(petID) references pets(id) on delete restrict
 );
 
 create table if not exists orderedService
@@ -85,7 +85,7 @@ create table if not exists orderedService
     quantity int not null default 1,
     price int,
     foreign key(orderID) references orders(orderID) on delete restrict,
-    foreign key(petServiceID) references petServices(petServiceID) on delete restrict
+    foreign key(petServiceID) references petServices(id) on delete restrict
 );
 
 create table if not exists orderedFood
@@ -96,7 +96,7 @@ create table if not exists orderedFood
     quantity int not null default 1,
     price int,
     foreign key(orderID) references orders(orderID) on delete restrict,
-    foreign key(petFoodID) references petFoods(petFoodID) on delete restrict
+    foreign key(petFoodID) references petFoods(id) on delete restrict
 );
 
 create table if not exists orderedProduct
@@ -107,7 +107,7 @@ create table if not exists orderedProduct
     quantity int not null default 1,
     price int,
     foreign key(orderID) references orders(orderID) on delete restrict,
-    foreign key(petProductID) references petProducts(petProductID) on delete restrict
+    foreign key(petProductID) references petProducts(id) on delete restrict
 );
 
 

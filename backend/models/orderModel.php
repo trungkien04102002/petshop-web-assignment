@@ -64,18 +64,18 @@
         public static function checkAvaiablity($type, $id, $quantity = 0){
             $conn = DbConnection::getInstance();
             if ($type == "pet"){
-                $stmt = $conn->prepare('SELECT isBought FROM pets WHERE petID = ?');
+                $stmt = $conn->prepare('SELECT isBought FROM pets WHERE id = ?');
                 $stmt->bind_param('i', $id); 
             }
             else if ($type == "food"){
-                $stmt = $conn->prepare('SELECT quantity < ? as isBought FROM petFoods WHERE petFoodID = ?');
+                $stmt = $conn->prepare('SELECT quantity < ? as isBought FROM petFoods WHERE id = ?');
                 $stmt->bind_param('ii', $quantity, $id); 
             }
             else if ($type == "service"){
                 return true;
             }
             else if ($type == "product"){
-                $stmt = $conn->prepare('SELECT quantity < ? as isBought FROM petProducts WHERE petProductID = ?');
+                $stmt = $conn->prepare('SELECT quantity < ? as isBought FROM petProducts WHERE id = ?');
                 $stmt->bind_param('ii', $quantity, $id); 
             }
             else{
@@ -91,11 +91,11 @@
             $conn = DbConnection::getInstance();
             if ($type == "pet"){
                 $stmt = $conn->prepare("INSERT INTO orderedPet(orderID, petID, price) VALUES
-                    (?,?,(SELECT unitPrice FROM pets WHERE petID = ?))");
+                    (?,?,(SELECT unitPrice FROM pets WHERE id = ?))");
                 $stmt->bind_param('iii',$orderID, $id, $id); 
                 $stmt->execute(); 
                 $itemID = $conn->insert_id;
-                $stmt = $conn->prepare("UPDATE pets SET isBought = true WHERE petID = ?");
+                $stmt = $conn->prepare("UPDATE pets SET isBought = true WHERE id = ?");
                 $stmt->bind_param('i',$id); 
                 $stmt->execute(); 
                 $stmt = $conn->prepare("SELECT price FROM orderedPet WHERE orderedPetID = ? ");
@@ -107,7 +107,7 @@
             }
             else if ($type == "service"){
                 $stmt = $conn->prepare("INSERT INTO orderedService(orderID, petServiceID, price, quantity) VALUES
-                    (?,?,(SELECT unitPrice FROM petServices WHERE petServiceID = ?),?)");
+                    (?,?,(SELECT unitPrice FROM petServices WHERE id = ?),?)");
                 $stmt->bind_param('iiii',$orderID, $id, $id,$quantity); 
                 $stmt->execute(); 
                 $itemID = $conn->insert_id;
@@ -120,11 +120,11 @@
             }
             else if ($type == "food") {
                 $stmt = $conn->prepare("INSERT INTO orderedFood(orderID, petFoodID, price, quantity) VALUES
-                    (?,?,(SELECT unitPrice FROM petFoods WHERE petFoodID = ?),?)");
+                    (?,?,(SELECT unitPrice FROM petFoods WHERE id = ?),?)");
                 $stmt->bind_param('iiii',$orderID, $id, $id, $quantity); 
                 $stmt->execute(); 
                 $itemID = $conn->insert_id;
-                $stmt = $conn->prepare("UPDATE petFoods SET quantity = quantity - ? WHERE petFoodID = ?");
+                $stmt = $conn->prepare("UPDATE petFoods SET quantity = quantity - ? WHERE id = ?");
                 $stmt->bind_param('ii',$quantity,$id); 
                 $stmt->execute(); 
                 $stmt = $conn->prepare("SELECT price FROM orderedFood WHERE orderedFoodID = ? ");
@@ -136,11 +136,11 @@
             }
             else{
                 $stmt = $conn->prepare("INSERT INTO orderedProduct(orderID, petProductID, price, quantity) VALUES
-                    (?,?,(SELECT unitPrice FROM petProducts WHERE petProductID = ?),?)");
+                    (?,?,(SELECT unitPrice FROM petProducts WHERE id = ?),?)");
                 $stmt->bind_param('iiii',$orderID, $id, $id, $quantity); 
                 $stmt->execute(); 
                 $itemID = $conn->insert_id;
-                $stmt = $conn->prepare("UPDATE petProducts SET quantity = quantity - ? WHERE petProductID = ?");
+                $stmt = $conn->prepare("UPDATE petProducts SET quantity = quantity - ? WHERE id = ?");
                 $stmt->bind_param('ii',$quantity,$id); 
                 $stmt->execute(); 
                 $stmt = $conn->prepare("SELECT price FROM orderedProduct WHERE orderedProductID = ? ");

@@ -79,6 +79,7 @@
                         $jwt = JWT::encode($payload, $key, 'HS256');
                         $user["token"] = $jwt;
                         echo json_encode($user);
+                        break;
                     case "test": 
                         echo file_get_contents('php://input');
                         return;
