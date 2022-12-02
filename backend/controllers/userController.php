@@ -31,10 +31,11 @@
                     case "avatar":
                         $fileName = UserModel::getAvatarFileName($user["email"]);
                         $name = "../images/$fileName";
-                        $fp = fopen($name, 'rb');
-                        header("Content-Type: image/png");
-                        header("Content-Length: " . filesize($name));
-                        fpassthru($fp);
+
+                        $type = pathinfo($name, PATHINFO_EXTENSION);
+                        $data = file_get_contents($name);
+                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                        echo json_encode(array("avatar"=>$base64));
                         break;
                 }
 
