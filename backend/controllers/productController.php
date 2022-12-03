@@ -32,7 +32,7 @@
                         if(isset($_GET["page"])){
                             $page = $_GET["page"];
                         } else {
-                            $page = 1;
+                            $page = 0;
                         }
                         echo json_encode(ProductModel::getPets($page));
                         break;
@@ -40,7 +40,7 @@
                         if(isset($_GET["page"])){
                             $page = $_GET["page"];
                         } else {
-                            $page = 1;
+                            $page = 0;
                         }
                         echo json_encode(ProductModel::getPetProducts($page));
                         break;
@@ -48,7 +48,7 @@
                         if(isset($_GET["page"])){
                             $page = $_GET["page"];
                         } else {
-                            $page = 1;
+                            $page = 0;
                         }
                         echo json_encode(ProductModel::getPetFoods($page));
                         break;  
@@ -56,7 +56,7 @@
                         if(isset($_GET["page"])){
                             $page = $_GET["page"];
                         } else {
-                            $page = 1;
+                            $page = 0;
                         }
                         echo json_encode(ProductModel::getPetServices($page));
                         break;  

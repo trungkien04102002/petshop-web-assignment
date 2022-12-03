@@ -5,12 +5,20 @@
 
         public static function getPets($page){
             $conn = DbConnection::getInstance();
-            $record_per_page = 10;
-            $start_from = ($page-1)*$record_per_page;
-            $stmt = $conn->prepare('SELECT *, "pet" as type FROM pets LIMIT ?, ?');
-            $stmt->bind_param('ss', $start_from,$record_per_page);
-            $stmt->execute(); 
-            $result = $stmt->get_result(); 
+            if($page === 0)
+            {
+                $stmt = $conn->prepare('SELECT *, "pet" as type FROM pets');
+                $stmt->execute(); 
+                $result = $stmt->get_result(); 
+            }
+            else {   
+                $record_per_page = 10;
+                $start_from = ($page-1)*$record_per_page;
+                $stmt = $conn->prepare('SELECT *, "pet" as type FROM pets LIMIT ?, ?');
+                $stmt->bind_param('ss', $start_from,$record_per_page);
+                $stmt->execute(); 
+                $result = $stmt->get_result(); 
+            }
             $pets = array();
             while ($row = $result->fetch_assoc()) {
                 array_push($pets, $row);
@@ -20,27 +28,44 @@
         
         public static function getPetProducts($page){
             $conn = DbConnection::getInstance();
-            $record_per_page = 3;
-            $start_from = ($page-1)*$record_per_page;
-            $stmt = $conn->prepare('SELECT *, "product" as type FROM petProducts LIMIT ?, ?');
-            $stmt->bind_param('ss', $start_from,$record_per_page);
-            $stmt->execute(); 
-            $result = $stmt->get_result(); 
+            if($page === 0)
+            {
+                $stmt = $conn->prepare('SELECT *, "product" as type FROM petProducts');
+                $stmt->execute(); 
+                $result = $stmt->get_result(); 
+            }
+            else{
+                $record_per_page = 10;
+                $start_from = ($page-1)*$record_per_page;
+                $stmt = $conn->prepare('SELECT *, "product" as type FROM petProducts LIMIT ?, ?');
+                $stmt->bind_param('ss', $start_from,$record_per_page);
+                $stmt->execute(); 
+                $result = $stmt->get_result();   
+            }    
             $petProducts = array();
             while ($row = $result->fetch_assoc()) {
-                array_push($petProducts, $row);
-            }       
-            return $petProducts;
+                array_push($petProducts, $row); 
+            }
+            return $petProducts;   
         }
+        
         
         public static function getPetFoods($page){
             $conn = DbConnection::getInstance();
-            $record_per_page = 10;
-            $start_from = ($page-1)*$record_per_page;
-            $stmt = $conn->prepare('SELECT *, "food" as type FROM petFoods LIMIT ?, ?');
-            $stmt->bind_param('ss', $start_from,$record_per_page);
-            $stmt-> execute();
-            $result = $stmt->get_result();
+            if($page === 0)
+            {
+                $stmt = $conn->prepare('SELECT *, "food" as type FROM petFoods');
+                $stmt->execute(); 
+                $result = $stmt->get_result(); 
+            }
+            else{
+                $record_per_page = 10;
+                $start_from = ($page-1)*$record_per_page;
+                $stmt = $conn->prepare('SELECT *, "food" as type FROM petFoods LIMIT ?, ?');
+                $stmt->bind_param('ss', $start_from,$record_per_page);
+                $stmt-> execute();
+                $result = $stmt->get_result();
+            }
             $petFoods = array();
             while ($row = $result->fetch_assoc()){
                 array_push($petFoods,$row);
@@ -50,12 +75,21 @@
 
         public static function getPetServices($page){
             $conn = DbConnection::getInstance();
-            $record_per_page = 10;
-            $start_from = ($page-1)*$record_per_page;
-            $stmt = $conn->prepare('SELECT *, "service" as type FROM petServices LIMIT ?, ?');
-            $stmt->bind_param('ss', $start_from,$record_per_page);
-            $stmt -> execute();
-            $result = $stmt->get_result();
+            if($page === 0)
+            {
+                $stmt = $conn->prepare('SELECT *, "service" as type FROM petServices');
+                $stmt->execute(); 
+                $result = $stmt->get_result(); 
+            }
+            else {
+                $record_per_page = 10;
+                $start_from = ($page-1)*$record_per_page;
+                $stmt = $conn->prepare('SELECT *, "service" as type FROM petServices LIMIT ?, ?');
+                $stmt->bind_param('ss', $start_from,$record_per_page);
+                $stmt -> execute();
+                $result = $stmt->get_result();
+            }
+            
             $petServices = array();
             while ($row = $result->fetch_assoc()){
                 array_push($petServices,$row);
