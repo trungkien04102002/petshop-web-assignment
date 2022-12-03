@@ -162,13 +162,55 @@
             return array_slice($combine_array,$start_from,$record_per_page);
         }
 
-        public static function editPet($id, $name, $unitPrice, $breed,$isBought,$imageURL,$age,$discountedPrice){
+        public static function editPet($id, $name, $unitPrice, $breed,$isBought,$imageUrl,$age,$discountedPrice){
             $conn = DbConnection::getInstance();
-            $stmt = $conn->prepare('UPDATE pets SET name = ?, unitPrice = ?, breed = ?, isBought = ?, imageURL = ?, age = ?, discountedPrice = ? WHERE id = ?');
-            $stmt->bind_param('sisisiii', $name,$unitPrice,$breed,$isBought,$imageURL,$age,$discountedPrice, $id); 
+            $stmt = $conn->prepare('UPDATE pets SET name = ?, unitPrice = ?, breed = ?, isBought = ?, imageUrl = ?, age = ?, discountedPrice = ? WHERE id = ?');
+            $stmt->bind_param('sisisiii', $name,$unitPrice,$breed,$isBought,$imageUrl,$age,$discountedPrice, $id); 
             $stmt->execute(); 
             $result = $stmt->get_result(); 
             $stmt = $conn->prepare('SELECT * FROM pets WHERE id = ?');
+            $stmt->bind_param('i', $id);
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $row = $result->fetch_assoc();
+            return $row;          
+        }
+
+        public static function editFood($id, $name, $unitPrice,$imageUrl,$quantity,$discountedPrice){
+            $conn = DbConnection::getInstance();
+            $stmt = $conn->prepare('UPDATE petFoods SET name = ?, unitPrice = ?, imageUrl = ?, quantity = ?, discountedPrice = ? WHERE id = ?');
+            $stmt->bind_param('sisiii', $name,$unitPrice,$imageUrl,$quantity,$discountedPrice, $id); 
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $stmt = $conn->prepare('SELECT * FROM petFoods WHERE id = ?');
+            $stmt->bind_param('i', $id);
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $row = $result->fetch_assoc();
+            return $row;          
+        }
+
+        public static function editProduct($id, $name, $unitPrice, $imageUrl, $category,$quantity, $discountedPrice){
+            $conn = DbConnection::getInstance();
+            $stmt = $conn->prepare('UPDATE petProducts SET name = ?, unitPrice = ?, imageUrl = ?, category = ?, quantity = ?, discountedPrice = ? WHERE id = ?');
+            $stmt->bind_param('sissiii', $name,$unitPrice,$imageUrl, $category, $quantity, $discountedPrice, $id ); 
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $stmt = $conn->prepare('SELECT * FROM petProducts WHERE id = ?');
+            $stmt->bind_param('i', $id);
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $row = $result->fetch_assoc();
+            return $row;          
+        }
+
+        public static function editService($id, $name, $unitPrice, $imageUrl,$discountedPrice){
+            $conn = DbConnection::getInstance();
+            $stmt = $conn->prepare('UPDATE petServices SET name = ?, unitPrice = ?, imageUrl = ?, discountedPrice = ? WHERE id = ?');
+            $stmt->bind_param('sisii', $name,$unitPrice,$imageUrl,$discountedPrice, $id ); 
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $stmt = $conn->prepare('SELECT * FROM petServices WHERE id = ?');
             $stmt->bind_param('i', $id);
             $stmt->execute(); 
             $result = $stmt->get_result(); 

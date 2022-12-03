@@ -73,6 +73,45 @@
                         $discountedPrice = $data["discountedPrice"];
                         echo json_encode(ProductModel::editPet($id, $name, $unitPrice, $breed,$isBought,$imageUrl,$age,$discountedPrice));
                         break;
+                    case "editFood":
+                        if (!isset($data["id"]) || !isset($data["name"]) || !isset($data["unitPrice"]) || !isset($data["imageUrl"])
+                        || !isset($data["quantity"]) || !isset($data["discountedPrice"]) ){
+                            throw new Exception("Lack information", 400);                           
+                        }
+                        $id = $data["id"];
+                        $name = $data["name"];
+                        $unitPrice = $data["unitPrice"];
+                        $imageUrl = $data["imageUrl"];
+                        $quantity = $data["quantity"];
+                        $discountedPrice = $data["discountedPrice"];
+                        echo json_encode(ProductModel::editFood($id, $name, $unitPrice, $imageUrl, $quantity, $discountedPrice));
+                        break;   
+                        case "editProduct":
+                            if (!isset($data["id"]) || !isset($data["name"]) || !isset($data["unitPrice"]) || !isset($data["imageUrl"])
+                            || !isset($data["category"])|| !isset($data["quantity"]) || !isset($data["discountedPrice"]) ){
+                                throw new Exception("Lack information", 400);                           
+                            }
+                            $id = $data["id"];
+                            $name = $data["name"];
+                            $unitPrice = $data["unitPrice"];
+                            $imageUrl = $data["imageUrl"];
+                            $category = $data["category"];
+                            $quantity = $data["quantity"];
+                            $discountedPrice = $data["discountedPrice"];
+                            echo json_encode(ProductModel::editProduct($id, $name, $unitPrice, $imageUrl, $category,$quantity, $discountedPrice));
+                            break;  
+                            case "editService":
+                            if (!isset($data["id"]) || !isset($data["name"]) || !isset($data["unitPrice"]) || !isset($data["imageUrl"])
+                            || !isset($data["discountedPrice"]) ){
+                                throw new Exception("Lack information", 400);                           
+                            }
+                            $id = $data["id"];
+                            $name = $data["name"];
+                            $unitPrice = $data["unitPrice"];
+                            $imageUrl = $data["imageUrl"];
+                            $discountedPrice = $data["discountedPrice"];
+                            echo json_encode(ProductModel::editService($id, $name, $unitPrice, $imageUrl,$discountedPrice));
+                            break;           
                 }
                 break;
             case "DELETE":
