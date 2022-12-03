@@ -58,6 +58,21 @@
                     case "orderstate":
                         echo json_encode(OrderModel::updateIsPaid($data["orderID"]));
                         break;
+                    case "editPet":
+                        if (!isset($data["id"]) || !isset($data["name"]) || !isset($data["unitPrice"]) || !isset($data["breed"])
+                        || !isset($data["isBought"]) || !isset($data["imageURL"]) || !isset($data["age"]) || !isset($data["discountedPrice"]) ){
+                            throw new Exception("Lack information", 400);                           
+                        }
+                        $id = $data["id"];
+                        $name = $data["name"];
+                        $unitPrice = $data["unitPrice"];
+                        $breed = $data["breed"];
+                        $isBought = $data["isBought"];
+                        $imageURL = $data["imageURL"] ;
+                        $age = $data["age"];
+                        $discountedPrice = $data["discountedPrice"];
+                        echo json_encode(ProductModel::editPet($id, $name, $unitPrice, $breed,$isBought,$imageURL,$age,$discountedPrice));
+                        break;
                 }
                 break;
             case "DELETE":

@@ -126,7 +126,20 @@
             // Combine array
             $combine_array = array_merge($pets,$petProducts,$petFoods,$petServices);
             return array_slice($combine_array,$start_from,$record_per_page);
+        }
 
+        public static function editPet($id, $name, $unitPrice, $breed,$isBought,$imageURL,$age,$discountedPrice){
+            $conn = DbConnection::getInstance();
+            $stmt = $conn->prepare('UPDATE pets SET name = ?, unitPrice = ?, breed = ?, isBought = ?, imageURL = ?, age = ?, discountedPrice = ? WHERE id = ?');
+            $stmt->bind_param('sisisiii', $name,$unitPrice,$breed,$isBought,$imageURL,$age,$discountedPrice, $id); 
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $stmt = $conn->prepare('SELECT * FROM pets WHERE id = ?');
+            $stmt->bind_param('i', $id);
+            $stmt->execute(); 
+            $result = $stmt->get_result(); 
+            $row = $result->fetch_assoc();
+            return $row;          
         }
         
     }
