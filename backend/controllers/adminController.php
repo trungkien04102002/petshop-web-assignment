@@ -60,7 +60,7 @@
                         break;
                     case "editPet":
                         if (!isset($data["id"]) || !isset($data["name"]) || !isset($data["unitPrice"]) || !isset($data["breed"])
-                        || !isset($data["isBought"]) || !isset($data["imageURL"]) || !isset($data["age"]) || !isset($data["discountedPrice"]) ){
+                        || !isset($data["isBought"]) || !isset($data["imageUrl"]) || !isset($data["age"]) || !isset($data["discountedPrice"]) ){
                             throw new Exception("Lack information", 400);                           
                         }
                         $id = $data["id"];
@@ -68,10 +68,10 @@
                         $unitPrice = $data["unitPrice"];
                         $breed = $data["breed"];
                         $isBought = $data["isBought"];
-                        $imageURL = $data["imageURL"] ;
+                        $imageUrl = $data["imageUrl"] ;
                         $age = $data["age"];
                         $discountedPrice = $data["discountedPrice"];
-                        echo json_encode(ProductModel::editPet($id, $name, $unitPrice, $breed,$isBought,$imageURL,$age,$discountedPrice));
+                        echo json_encode(ProductModel::editPet($id, $name, $unitPrice, $breed,$isBought,$imageUrl,$age,$discountedPrice));
                         break;
                 }
                 break;
