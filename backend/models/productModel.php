@@ -96,14 +96,13 @@
             }
             return $petServices;
         }
-        public static function searchByBreed($breed,$page){ // To sort the list of pets by breed
+        public static function searchByBreed($breed){ // To sort the list of pets by breed
             $conn = DbConnection::getInstance();
-            $record_per_page = 10;
-            $start_from = ($page-1)*$record_per_page;
-            $stmt = $conn -> prepare('SELECT *, "pet" as type FROM pets WHERE breed = ? LIMIT ?,?');
-            $stmt->bind_param('sss', $breed,$start_from,$record_per_page);
+            $stmt = $conn -> prepare('SELECT *, "pet" as type FROM pets WHERE breed = ?');
+            $stmt->bind_param('s',$breed);
             $stmt-> execute();
             $result = $stmt->get_result();
+        
             $pets = array();
             while ($row = $result->fetch_assoc()){
                 array_push($pets,$row);
@@ -111,11 +110,9 @@
             return $pets;
         }
 
-        public static function searchItem($keySearch,$page){ // To search anythings in Pets, Services, Foods, Products table  
+        public static function searchItem($keySearch){ // To search anythings in Pets, Services, Foods, Products table  
             $conn = DbConnection::getInstance();       
             $keySearch = "%$keySearch%";
-            $record_per_page = 10;
-            $start_from = ($page-1)*$record_per_page; // prepare the $name variable 
 
             // Get pets have name is same with keySearch
             $sql = "SELECT *, 'pet' as type FROM pets WHERE name LIKE ?"; // SQL with parameters
@@ -159,7 +156,7 @@
 
             // Combine array
             $combine_array = array_merge($pets,$petProducts,$petFoods,$petServices);
-            return array_slice($combine_array,$start_from,$record_per_page);
+            return $combine_array;
         }
 
         public static function editPet($id, $name, $unitPrice, $breed,$isBought,$imageUrl,$age,$discountedPrice){
