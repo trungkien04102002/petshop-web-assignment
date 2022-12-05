@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { json } from 'react-router-dom';
 
 export const signIn = async(formValue) => {
 
@@ -163,7 +164,7 @@ export const createOrder = async(token,order,payment) => {
         method: "post",
         url: "http://localhost:8000/controllers/orderController.php",
         data: {
-          order:order,
+          order:JSON.stringify(order),
           paymentMethod:payment
         },
         headers: {Authorization: `Bearer ${token}`,

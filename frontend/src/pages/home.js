@@ -1,5 +1,7 @@
 import React from 'react';
 import {useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import Category from '../components/Category/category';
 import Footer from '../components/Footer/footer';
 import Header from '../components/Header/header';
@@ -41,12 +43,8 @@ import NewsLetter from '../components/News Letter/newsLetter';
 
 
 const Home = ({data}) => {
+    const navigate = useNavigate();
 
-    // let hotPets =[];
-    // for(var i=0;i<4;i++){
-    //     hotPets.push(data[i]);
-    // }
-    // console.log(hotPets)
   
     return (
         <>
@@ -57,15 +55,15 @@ const Home = ({data}) => {
                 <p className="font-extrabold text-4xl">Dịch vụ</p>
                 <p className="text-xl md:text-lg">Chúng tôi chăm sóc gia đình nhỏ của bạn, chúng tôi đảm bảo sẽ dành những điều tốt nhất cho gia đình nhỏ của bạn</p>
                 <div className="flex flex-row flex-wrap gap-x-20 gap-y-8 py-4 justify-center">
-                    <div className="flex flex-col items-center gap-y-4">
+                    <div onClick={()=>{navigate('/petProduct')}} className="flex flex-col items-center gap-y-4">
                         <img className="rounded-[120px] max-w-[350px] hover:scale-105 ease-in duration-300" src="https://petmania.vamtam.com/wp-content/uploads/2022/07/iStock-1271793136.jpg" alt="img"/>
                         <p className="text-3xl font-extrabold">Phụ kiện</p>
                     </div>
-                    <div className="flex flex-col items-center gap-y-4">
+                    <div onClick={()=>{navigate('/petService')}} className="flex flex-col items-center gap-y-4">
                         <img className="rounded-[120px] max-w-[350px] hover:scale-105 ease-in duration-300" src="https://petmania.vamtam.com/wp-content/uploads/2022/07/iStock-1398781665.jpg" alt="img"/>
                         <p className="text-3xl font-extrabold">Dịch vụ</p>
                     </div>
-                    <div className="flex flex-col items-center gap-y-4">
+                    <div onClick={()=>{navigate('/petFood')}} className="flex flex-col items-center gap-y-4">
                         <img className="rounded-[120px] max-w-[350px] hover:scale-105 ease-in duration-300" src="https://petmania.vamtam.com/wp-content/uploads/2022/07/iStock-1140125261.jpg" alt="img"/>
                         <p className="text-3xl font-extrabold">Thức ăn</p>
                     </div>

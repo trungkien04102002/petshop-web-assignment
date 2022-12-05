@@ -103,7 +103,6 @@ const Cart = ({onRemove}) => {
                         navigate('/order');
                         if(isLogin===false)
                         navigate('/signIn');
-
                         createOrder(localStorage.getItem('user'),order,payment)}}>Đặt hàng ngay</button>
                         
                         

@@ -41,7 +41,7 @@ const Order = () => {
                 
                 {
                     orders.map((order,key) => (
-                        <div key={key} className="flex flex-row flex-wrap gap-4 border-b-2 border-gray-100 pt-8">
+                        <div key={key} className="lg:w-[500px] w-[450px] flex flex-row flex-wrap gap-4 border-b-2 border-gray-100 pt-8">
                             <div className="flex flex-col flex-wrap gap-4">
                                 <p><b>Mã đơn hàng:</b> {order.orderID}</p>
                                 <p><b>Phương thức thanh toán:</b> {order.paymentMethod}</p>

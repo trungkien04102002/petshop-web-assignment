@@ -1,6 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay,Pagination} from 'swiper';
+import { useNavigate } from 'react-router-dom'
 
 import slide1 from '../../img/slide5.png';
 import slide2 from '../../img/slide4.png';
@@ -45,6 +46,8 @@ const sliderList = [
   ]
 
 const Slider = () => {
+    const navigate = useNavigate();
+
     return (
         <>
         <Swiper
@@ -67,7 +70,7 @@ const Slider = () => {
                         <h2 className="font-medium text-5xl p-2">{slider.secondaryContent}</h2>
                         <h2 className="font-bold text-5xl p-2">{slider.thirContent}</h2>
                         <h3 className="font-bold text-2xl text-pink-400 p-3">{slider.discount}</h3>
-                        <button className="mt-2 ml-2 whitespace-nowrap w-32 inline-flex items-center justify-center 
+                        <button onClick={()=>{navigate('/pet')}} className="mt-2 ml-2 whitespace-nowrap w-32 inline-flex items-center justify-center 
                         px-4 py-2 border border-transparent rounded-3xl shadow-sm text-base font-medium text-white bg-sky-400 hover:bg-sky-500">
                             {slider.buttonContent}</button>
                         </div>
