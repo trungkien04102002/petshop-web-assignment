@@ -95,7 +95,7 @@ const AvatarInput = ({title, des, value}) => {
                 <p className="font-medium text-lg">{title}</p>
                 
             <form onSubmit={handleSubmit}>
-                <label className="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Upload file</label>
                 <input  onChange={handleFileSelect}
                         className="block max-w-xl text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
                         id="file_input" 

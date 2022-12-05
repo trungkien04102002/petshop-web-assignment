@@ -11,8 +11,8 @@ const CartPrd = ({setStatus,onRemove,product}) => {
                 {/*  info */}
                 <div className="flex flex-row flex-wrap items-center gap-x-4 gap-y-4 ">
                     {/* remove button */}
-                    <svg onClick={()=>{setCount(!count);onRemove(product)}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <svg onClick={()=>{setCount(!count);onRemove(product)}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
 
                     <img className="w-32 h-32 rounded-lg" src={product.imageUrl} alt="list"/>

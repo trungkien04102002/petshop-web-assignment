@@ -116,19 +116,19 @@ const SignUpForm = () => {
 
                                     {/* name */}
                                     <div>
-                                        <label for="fullName" className="block mb-2 text-sm font-medium text-gray-900">Họ và tên</label>
+                                        <label htmlFor="fullName" className="block mb-2 text-sm font-medium text-gray-900">Họ và tên</label>
                                         <input  onChange={handleChangeText} type="fullName" name="fullName" id="fullName" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Tên của bạn là?" required=""/>
                                     </div>
 
                                     {/* email */}
                                     <div>
-                                        <label for="email" className="block mb-2 text-sm font-medium text-gray-900">Địa chỉ email</label>
+                                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Địa chỉ email</label>
                                         <input  onChange={handleChangeText} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" required=""/>
                                     </div>
 
                                     {/* phone */}
                                     <div>
-                                        <label for="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900">Số điện thoại</label>
+                                        <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900">Số điện thoại</label>
                                         <input  onChange={handleChangeText} type="phoneNumber" name="phoneNumber" id="phoneNumber" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="số điện thoại" required=""/>
                                     </div>
                                     
@@ -159,7 +159,7 @@ const SignUpForm = () => {
                                                 /> */}
 
                                                 <div>
-                                                    <label for="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
+                                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
                                                     <input 
                                                      onBlur={handleBlur}
                                                     onChange={handleChange}
@@ -179,7 +179,7 @@ const SignUpForm = () => {
                                                 /> */}
 
                                                 <div>
-                                                    <label for="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
+                                                    <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
                                                     <input
                                                         type="password"
                                                         name="changepassword"
@@ -202,12 +202,12 @@ const SignUpForm = () => {
 
                                     {/* pass */}
                                     {/* <div>
-                                        <label for="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
+                                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
                                         <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required=""/>
                                     </div> */}
                                     {/* re-pass */}
                                     {/* <div>
-                                        <label for="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
+                                        <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
                                         <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required=""/>
                                     </div> */}
 
@@ -216,7 +216,7 @@ const SignUpForm = () => {
                                             <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required=""/>
                                         </div>
                                         <div className="ml-3 text-sm">
-                                            <label for="terms" className="font-light text-gray-500">Tối chấp nhận <a className="font-medium text-primary-600 hover:underline" href="#">các chính sách và điều khoản</a></label>
+                                            <label htmlFor="terms" className="font-light text-gray-500">Tối chấp nhận <a className="font-medium text-primary-600 hover:underline" href="#">các chính sách và điều khoản</a></label>
                                         </div>
                                     </div>
 

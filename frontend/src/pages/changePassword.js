@@ -53,11 +53,11 @@ const ChangePassword = () => {
                 <p className="text-3xl font-bold">Đổi mật khẩu</p>
 
                 <div className="flex flex-col gap-1">
-                    <label class="block text-gray-700 font-bold mb-2" for="password">
+                    <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
                         Nhập mật khẩu mới
                     </label>
                     <input  onChange={handleChange}
-                            class="shadow appearance-none border lg:w-[500px] rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border lg:w-[500px] rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
                             id="password" 
                             type="password" 
                             placeholder="******************"></input>

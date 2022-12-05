@@ -80,10 +80,10 @@ const Cart = ({onRemove}) => {
                         <div className="flex flex-row gap-4">
                             <p className="font-bold text-lg">Phương thức thanh toán:</p>
                             <input onChange={handleChange} type="radio" id="Momo" name="fav_language" value="Momo"/>
-                            <label class="text-lg font-bold" for="Momo">Momo</label><br></br>
+                            <label className="text-lg font-bold" htmlFor="Momo">Momo</label><br></br>
 
                             <input onChange={handleChange} type="radio" id="direct" name="fav_language" value="direct"/>
-                            <label class="text-lg font-bold" for="direct">Trực tiếp</label><br></br>
+                            <label className="text-lg font-bold" htmlFor="direct">Trực tiếp</label><br></br>
                         </div>
                         <button className="text-white font-semibold bg-gray-700 w-fit rounded-3xl p-2 px-6" 
                         onClick={()=>{

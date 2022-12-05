@@ -9,7 +9,7 @@ import AdminHeader from '../components/Header/adminHeader';
 const AdminProduct = ({data}) => {
     const navigate=useNavigate();
     // const [pets,setPets]= useState([]);
-    console.log(data)
+    // console.log(data)
 //   useEffect(()=>{
 //     (async () => {
 //     //   const res = await getUser(localStorage.getItem('user'));

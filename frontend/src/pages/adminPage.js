@@ -62,8 +62,8 @@ const AdminPage = () => {
                                 </div>
                                 <div className="bg-gray-200 p-2 md:p-1 xl:p-2 rounded-md">
                                     {/* <img src="" alt="icon" className="w-auto h-8 md:h-6 xl:h-8 object-cover"/> */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                                         </svg>
                                 </div>
                             </div>
@@ -87,12 +87,12 @@ const AdminPage = () => {
 
                     {
                         listOrder.map((order,key)=>(
-                            <li class="py-3 flex justify-between text-sm items-center mx-auto text-gray-500 font-semibold">
-                                <p class="px-4 font-semibold">OrderID: {order.orderID}</p>
-                                <p class="px-4 text-gray-600">UserID: {order.userID}</p>
-                                {/* <p class="px-4 tracking-wider">Cash</p> */}
-                                <p class="px-4 text-blue-600">{order.totalPrice} VND</p>
-                                <p class="md:text-base text-gray-800 flex items-center gap-2">Payment method: {order.paymentMethod}</p>
+                            <li className="py-3 flex justify-between text-sm items-center mx-auto text-gray-500 font-semibold">
+                                <p className="px-4 font-semibold">OrderID: {order.orderID}</p>
+                                <p className="px-4 text-gray-600">UserID: {order.userID}</p>
+                                {/* <p className="px-4 tracking-wider">Cash</p> */}
+                                <p className="px-4 text-blue-600">{order.totalPrice} VND</p>
+                                <p className="md:text-base text-gray-800 flex items-center gap-2">Payment method: {order.paymentMethod}</p>
                             </li>
                         ))
                     }

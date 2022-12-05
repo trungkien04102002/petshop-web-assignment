@@ -36,8 +36,8 @@ const FeedBack = () => {
                         feedbacks.map((feedback,key)=>(
                             <div className="flex flex-col gap-4 bg-gray-50 rounded-xl p-2 shadow-md lg:w-[650px]">
                                 <div className="flex flex-row gap-2 items-center border-b-2 border-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                     </svg>
                                     <div className="flex flex-col">
                                         <p className="font-bold text-lg">{feedback.fullName}</p>
@@ -51,7 +51,7 @@ const FeedBack = () => {
                     }
                 </div>
               
-                <div class="flex flex-col gap-4 form-group mb-6 gap-4">
+                <div className="flex flex-col gap-4 form-group mb-6 gap-4">
 
                 <textarea 
                 onChange={handleChange}
