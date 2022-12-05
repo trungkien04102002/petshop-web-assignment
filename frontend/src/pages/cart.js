@@ -7,7 +7,7 @@ import Header from '../components/Header/header';
 import CartPrd from '../components/Product/cartPrd';
 import wishlist from '../img/wishlist.png';
 import { AddContext } from '../App';
-import {createOrder} from '../api/userApi'
+import {createOrder, userInfo} from '../api/userApi'
 
 const cart =[
     {
@@ -54,7 +54,17 @@ const Cart = ({onRemove}) => {
     const [payment, setPayment] = useState('');
     const {cartItems,order}= useContext(AddContext);
     const navigate = useNavigate();
-    
+    const [isLogin, setIsLogin] = useState(false);
+       // call api
+    useEffect(()=>{
+    (async () => {
+      const user = await await userInfo(localStorage.getItem('user'));
+      if(user.fullName){
+        setIsLogin(true);
+      }
+    })()
+    },[])
+
     const handleChange = event => {
         setPayment(event.target.value);
       };
@@ -85,9 +95,15 @@ const Cart = ({onRemove}) => {
                             <input onChange={handleChange} type="radio" id="direct" name="fav_language" value="direct"/>
                             <label className="text-lg font-bold" htmlFor="direct">Trực tiếp</label><br></br>
                         </div>
+
+
                         <button className="text-white font-semibold bg-gray-700 w-fit rounded-3xl p-2 px-6" 
                         onClick={()=>{
-                        navigate('/order'); 
+                        if(isLogin===true)
+                        navigate('/order');
+                        if(isLogin===false)
+                        navigate('/signIn');
+
                         createOrder(localStorage.getItem('user'),order,payment)}}>Đặt hàng ngay</button>
                         
                         
