@@ -87,7 +87,7 @@ const Cart = ({onRemove}) => {
                         </div>
                         <button className="text-white font-semibold bg-gray-700 w-fit rounded-3xl p-2 px-6" 
                         onClick={()=>{
-                        navigate('/pet'); 
+                        navigate('/order'); 
                         createOrder(localStorage.getItem('user'),order,payment)}}>Đặt hàng ngay</button>
                         
                         
